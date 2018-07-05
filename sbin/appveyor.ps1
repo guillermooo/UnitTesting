@@ -59,7 +59,7 @@ function Bootstrap {
         if ( ${env:COVERAGE_TAG} -eq $null){
             # the latest tag
             $COVERAGE_TAG = git ls-remote --tags $COV_URL | %{$_ -replace ".*/(.*)$", '$1'} `
-                    | where-object {$_ -notmatch "\^"} |%{[System.Version]$_} `
+                    | where-object {$_ -notmatch "\^|^st"} |%{[System.Version]$_} `
                     | sort | select-object -last 1 | %{ "$_" }
         } else {
             $COVERAGE_TAG = ${env:COVERAGE_TAG}
